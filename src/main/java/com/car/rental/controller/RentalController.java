@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.car.rental.domain.Customer;
 import com.car.rental.domain.Rental;
+import com.car.rental.service.CustomerService;
 import com.car.rental.service.RentalService;
+import com.car.rental.service.VehicleService;
 
 @Controller
 @SessionAttributes({"rental"})
@@ -26,12 +27,18 @@ public class RentalController {
 	@Autowired
 	RentalService rentalService;
 	
+	@Autowired
+	CustomerService customerService;
+	
+	@Autowired
+	VehicleService vehicleService;
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder)
 	{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,false));
+		
 	}
 	
 	@RequestMapping("/rental")
@@ -46,6 +53,8 @@ public class RentalController {
 	@RequestMapping("/rental/add")
 	public String addRental(Model model){
 		model.addAttribute("rental", new Rental());
+		model.addAttribute("customers", customerService.getAllCustomer());
+		model.addAttribute("vehicles",vehicleService.getAllVehicle());
 		return "rental/addRental";
 	}
 	

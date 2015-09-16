@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 @Entity
 public class Rental {
 	@Id
@@ -13,6 +14,11 @@ public class Rental {
 	private Date startDate;
 	private Date maxDuration;
 	private Date endDate;
+	
+	@OneToOne
+	private Customer customer;
+	@OneToOne
+	private Vehicle vehicle;
 	
 	
 	public Integer getRentalId() {
@@ -39,6 +45,18 @@ public class Rental {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 	
 	

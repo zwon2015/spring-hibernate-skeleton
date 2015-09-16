@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -33,7 +34,7 @@ public class VehicleTypeController {
 
 		vehicleTypeService.addVehicleType(vehicleType);
 
-		return "redirect:vehicleType/allVehicleType";
+		return "redirect:/vehicleType";
 	}
 	
 	@RequestMapping("/vehicleType")
@@ -43,4 +44,20 @@ public class VehicleTypeController {
 
 		return "vehicleType/allVehicleType";
 	}
+	@RequestMapping("/vehicleType/edit/{vehicleTypeId}")
+	public String editCustomer(@PathVariable("vehicleTypeId") int vehicleTypeId, Model model) {
+
+		model.addAttribute("vehicleType", vehicleTypeService.searchVehicleTypeById(vehicleTypeId));
+
+		return "vehicleType/addVehicleType";
+	}
+	
+	@RequestMapping("/vehicleType/delete/{vehicleTypeId}")
+	public String deleteCustomer(@PathVariable("vehicleTypeId") int vehicleTypeId, Model model) {
+
+		vehicleTypeService.deleteVehicleType(vehicleTypeId);
+		return "redirect:/vehicleType";
+	}
+	
+	
 }

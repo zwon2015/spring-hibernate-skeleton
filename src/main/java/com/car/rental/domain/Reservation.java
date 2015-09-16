@@ -24,5 +24,6 @@ public class Reservation {
 		this.reservedDate = reservedDate;
 	}
 	
+	
 
 }

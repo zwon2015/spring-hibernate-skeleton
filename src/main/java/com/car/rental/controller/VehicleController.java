@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -66,6 +67,21 @@ public class VehicleController {
 		model.addAttribute("vehicle", vehicleService.getAllVehicle());
 
 		return "vehicle/allVehicle";
+	}
+	
+	@RequestMapping("/vehicle/edit/{vehicleId}")
+	public String editCustomer(@PathVariable("vehicleId") int vehicleId, Model model) {
+
+		model.addAttribute("vehicle", vehicleService.searchVehicleById(vehicleId));
+
+		return "vehicle/addVehicle";
+	}
+	
+	@RequestMapping("/vehicle/delete/{vehicleId}")
+	public String deleteCustomer(@PathVariable("vehicleId") int vehicleId, Model model) {
+
+		vehicleService.deleteVehicle(vehicleId);
+		return "redirect:/vehicle";
 	}
 	
 	

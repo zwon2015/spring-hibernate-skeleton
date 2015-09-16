@@ -24,6 +24,8 @@ public class CustomerDaoImpl extends SessionUtil implements CustomerDao{
 
 	@Override
 	public List<Customer> getAllCustomer() {
+		
+		
 		return getSession().createQuery("From Customer").list();
 	}
 
