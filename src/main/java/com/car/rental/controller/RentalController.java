@@ -63,7 +63,7 @@ public class RentalController {
 
 		rentalService.saveRental(rental);
 
-		return "redirect:/rental";
+		return "redirect:rental";
 	}
 	
 	@RequestMapping("/rental/edit/{rentalId}")
